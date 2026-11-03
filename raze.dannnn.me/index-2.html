@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="zh-CN">
+  
+<!-- Mirrored from https://raze.dannnn.me/ by HTTrack Website Copier/3.x [XR&CO], Tue, 03 Nov 2026 06:34:26 GMT -->
+<head>
+    <style data-training-page-loading-style="">
+#training-page-loading{display:none}
+html:not([data-surface="home"]):not([data-private-mode-loading]):not([data-scenario-surface]):not([data-pidan-surface]):not([data-parkour-challenge-surface]):not([data-training-page-ready]),html:not([data-surface="home"]):not([data-private-mode-loading]):not([data-scenario-surface]):not([data-pidan-surface]):not([data-parkour-challenge-surface]):not([data-training-page-ready]) body{margin:0;background:#090d18}
+html:not([data-surface="home"]):not([data-private-mode-loading]):not([data-scenario-surface]):not([data-pidan-surface]):not([data-parkour-challenge-surface]):not([data-training-page-ready]) #app{visibility:hidden;pointer-events:none}
+html:not([data-surface="home"]):not([data-private-mode-loading]):not([data-scenario-surface]):not([data-pidan-surface]):not([data-parkour-challenge-surface]) #training-page-loading{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;box-sizing:border-box;padding:24px;background:#090d18;color:#dbe8ed;font:14px/1.6 'Microsoft YaHei UI',system-ui,sans-serif;transition:opacity .18s ease}
+html:not([data-surface="home"]):not([data-private-mode-loading]):not([data-scenario-surface]):not([data-pidan-surface]):not([data-parkour-challenge-surface])[data-training-page-ready] #training-page-loading{opacity:0;pointer-events:none}
+#training-page-loading .training-page-loading-content{max-width:360px;text-align:center}
+#training-page-loading .training-page-loading-brand{margin:0 0 18px;color:#90a7ba;font-size:12px;letter-spacing:.08em}
+#training-page-loading h1{font-size:22px;font-weight:600;margin:0 0 14px}
+#training-page-loading .training-page-loading-status{display:flex;align-items:center;justify-content:center;gap:10px}
+#training-page-loading [data-training-page-spinner]{width:18px;height:18px;flex:none;border:2px solid #29414e;border-top-color:#54e2d9;border-radius:50%;animation:training-page-spin .9s linear infinite}
+#training-page-loading [data-training-page-message]{margin:0;color:#abc1d1;overflow-wrap:anywhere}
+#training-page-loading .training-page-loading-actions{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:24px}
+#training-page-loading a,#training-page-loading button{font:inherit;font-size:12px;color:#9bcfc8}
+#training-page-loading a{text-underline-offset:4px}
+#training-page-loading button{background:#142b34;border:1px solid #37565f;padding:6px 12px;cursor:pointer}
+#training-page-loading :focus-visible{outline:2px solid #54e2d9;outline-offset:4px}
+#training-page-loading [hidden]{display:none!important}
+@keyframes training-page-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#training-page-loading [data-training-page-spinner]{animation:none}html:not([data-surface="home"]):not([data-private-mode-loading]):not([data-scenario-surface]):not([data-pidan-surface]):not([data-parkour-challenge-surface]) #training-page-loading{transition:none}}
+</style>
+
+    <meta charset="UTF-8" /><meta name="application-version" content="0.1.1299" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090d18" />
+    <link rel="icon" type="image/png" sizes="48x48" href="../download.dannnn.me/native/c3e421b66eab6728/program/assets/favicon-CG1OLDzz3a70.png?raze-channel=public-cors-v1" />
+    <link rel="apple-touch-icon" href="../download.dannnn.me/native/c3e421b66eab6728/program/assets/apple-touch-DblSYFEU3a70.png?raze-channel=public-cors-v1" />
+    <meta
+      name="description"
+      content="用于学习 Raze 炸药包位移关系的浏览器端 3D 训练工具。"
+    />
+    <title>Dannnn🥚的训练场</title>
+  <script data-home-route>document.documentElement.dataset.privateModesRelease="93ee930c1dabca99bf53d1deec336ff370ee698ca4bd489e24ec0b209590a26f";document.documentElement.dataset.surface=(function isHomeRoute(href) {
+  const url = new URL(href);
+  const entry = ['/', 'index.html', 'creator/index.html', '/creator/index.html'].includes(url.pathname)
+    || /^\/toy\/[A-Za-z0-9_-]+\/(?:(?:index|app)\.html)?$/.test(url.pathname)
+    || /^\/(?:creator\/)?release-preview-v\d+(?:-r\d+)?\.html$/.test(url.pathname);
+  return entry && !['editor','workshop'].includes(url.searchParams.get('privatePage')) && url.searchParams.get('view') !== 'training'
+    && !['map', 'mode', 'customLevel', 'downloadMap'].some(key => url.searchParams.has(key));
+})(location.href)?'home':'training';if((function requiredModeFeatures(href) {
+  const url = new URL(href), query = url.searchParams, features = [];
+  const selected = (key, value) => query.getAll(key).includes(value);
+  if (selected('mode', 'pidan-chase')) features.push('pidan-chase');
+  if (selected('view', 'workshop') || selected('entry', 'workshop') || selected('botScenario', '1')) features.push('bot-scenario');
+  const parkourParameters = ['parkourCloud', 'parkourDraft', 'parkourNew', 'parkourSnapshot', 'parkourChallenge',
+    'parkourVerify', 'parkourAuthor', 'parkourReplay', 'parkourContinue', 'parkourPractice', 'parkourEditor',
+    'parkourList', 'parkourType', 'parkourTitle', 'parkourVersion', 'parkourAuthorName'];
+  if (url.pathname.replace(/\/$/, '') === '/workshop.html' || selected('entry', 'parkour')
+    || parkourParameters.some(key => query.has(key))) features.push('parkour');
+  return features;
+})(location.href).some(feature=>feature==='parkour'||feature==='bot-scenario'||feature==='pidan-chase'))document.documentElement.dataset.privateModeLoading='';if(document.documentElement.dataset.surface==='home'&&!['maps','workshop','login'].includes(new URLSearchParams(location.search).get('view'))&&!(function requiredModeFeatures(href) {
+  const url = new URL(href), query = url.searchParams, features = [];
+  const selected = (key, value) => query.getAll(key).includes(value);
+  if (selected('mode', 'pidan-chase')) features.push('pidan-chase');
+  if (selected('view', 'workshop') || selected('entry', 'workshop') || selected('botScenario', '1')) features.push('bot-scenario');
+  const parkourParameters = ['parkourCloud', 'parkourDraft', 'parkourNew', 'parkourSnapshot', 'parkourChallenge',
+    'parkourVerify', 'parkourAuthor', 'parkourReplay', 'parkourContinue', 'parkourPractice', 'parkourEditor',
+    'parkourList', 'parkourType', 'parkourTitle', 'parkourVersion', 'parkourAuthorName'];
+  if (url.pathname.replace(/\/$/, '') === '/workshop.html' || selected('entry', 'parkour')
+    || parkourParameters.some(key => query.has(key))) features.push('parkour');
+  return features;
+})(location.href).length)document.documentElement.dataset.playerSurface='loading';</script><style data-private-mode-loading-style>
+html[data-private-mode-loading],html[data-private-mode-loading] body{margin:0!important;padding:0!important;min-height:100%;overflow:hidden!important;background:#090f19!important}
+html[data-private-mode-loading] body>:not(#private-mode-loading){visibility:hidden!important;pointer-events:none!important}
+#private-mode-loading{display:none}
+html[data-private-mode-loading] #private-mode-loading{box-sizing:border-box;position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:28px;background:#090f19;color:#eff5fc;font:14px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;visibility:visible!important}
+#private-mode-loading *{box-sizing:border-box}
+#private-mode-loading .private-mode-loading-card{width:min(100%,380px);padding:30px 32px;border:1px solid #263647;border-radius:16px;background:#111c29;box-shadow:0 20px 70px #0003}
+#private-mode-loading .private-mode-loading-brand{margin:0 0 12px;color:#8fa7ba;font-size:12px;letter-spacing:.08em}
+#private-mode-loading h1{margin:0 0 18px;font-size:23px;line-height:1.35;font-weight:650}
+#private-mode-loading .private-mode-loading-status{display:flex;align-items:center;gap:11px;color:#b9cad8}
+#private-mode-loading [data-private-mode-loading-status]{margin:0;overflow-wrap:anywhere}
+#private-mode-loading [data-private-mode-loading-spinner]{display:block;flex:0 0 18px;width:18px;height:18px;border:2px solid #2d4658;border-top-color:#5de5d5;border-radius:50%;animation:private-mode-loading-spin 1s linear infinite}
+#private-mode-loading [data-private-mode-loading-actions]{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:24px}
+#private-mode-loading button,#private-mode-loading a{font:inherit;line-height:1.4}
+#private-mode-loading button{padding:9px 15px;border:1px solid #4eb9ad;border-radius:8px;background:#183b3c;color:#b4fff1;cursor:pointer}
+#private-mode-loading a{color:#c4d5e4;text-decoration:underline;text-underline-offset:4px}
+#private-mode-loading button:focus-visible,#private-mode-loading a:focus-visible{outline:2px solid #79f0df;outline-offset:4px}
+#private-mode-loading [hidden]{display:none!important}
+@keyframes private-mode-loading-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#private-mode-loading [data-private-mode-loading-spinner]{animation:none}}
+</style><style data-player-home-loading-style>html[data-surface="home"][data-player-surface="loading"],html[data-surface="home"][data-player-surface="loading"] body{margin:0;background:#090f19;color:#f2f6ff;font-family:system-ui,sans-serif}html[data-player-surface="loading"] #mode-home>header,html[data-player-surface="loading"] #mode-home>footer{display:none}html[data-player-surface="loading"] .player-home-loading{padding:32px;font-size:14px;color:#90a2bc}</style>  <script type="module" crossorigin src="../download.dannnn.me/native/da98f55a66ef6b97/program/assets/main-BH7ldTXl3a70.js?raze-channel=public-cors-v1"></script>
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/c3e421b66eab6728/program/assets/preload-helper-BXl3LOEh3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/061127f13a369d65/program/assets/toy-config-CKJ24xLD3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/61b6f82dd611dfde/program/assets/local-map-optimizations--Oy3g8FH3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/d93871ae21bf53fa/program/assets/equipment-appearance-zrJ83wtV3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/61b6f82dd611dfde/program/assets/raze-block-preview-Ba-Yhcoo3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/61b6f82dd611dfde/program/assets/bot-red-preview-WEvhsIyD3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/5c66052b2e2187fd/program/assets/map-route-CgttIqOJ3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/5c66052b2e2187fd/program/assets/home-route-DsviUlOo3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/5c66052b2e2187fd/program/assets/page-route-Dc8kGwch3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/166f46da7a832c83/program/assets/account-client-BuHcQvCQ3a70.js?raze-channel=public-cors-v1">
+  <link rel="modulepreload" crossorigin href="../download.dannnn.me/native/166f46da7a832c83/program/assets/mode-access-RM_Frd8G3a70.js?raze-channel=public-cors-v1">
+  <link rel="stylesheet" crossorigin href="../download.dannnn.me/native/3d10065e29233f50/program/assets/main-BbLul_8w3a70.css?raze-channel=public-cors-v1">
+</head>
+  <body class="observation-panels-hidden">
+    <section id="training-page-loading" aria-label="正在进入训练场"><div class="training-page-loading-content">
+  <p class="training-page-loading-brand">Dannnn的训练场</p><h1>正在进入训练场</h1>
+  <div class="training-page-loading-status"><span data-training-page-spinner aria-hidden="true"></span><p data-training-page-message role="status">正在准备界面…</p></div>
+  <div class="training-page-loading-actions"><button data-training-page-retry type="button" hidden>重新加载</button><a data-home-link href="index-2.html">返回主页</a></div>
+  <noscript>请启用 JavaScript 后重新加载。</noscript>
+</div></section>
+
+    <section id="mode-home" class="mode-home" aria-label="训练场主页">
+  <header class="home-header">
+    <div class="home-brand">
+      <a href="index-2.html" data-home-link aria-label="Dannnn 的训练场主页"><img src="../download.dannnn.me/native/c3e421b66eab6728/program/assets/logo-B8kVU23R3a70.png?raze-channel=public-cors-v1" width="76" height="76" alt="" draggable="false" /></a>
+      <div>
+        <a href="index-2.html" data-home-link><strong>Dannnn 的训练场</strong></a>
+        <nav class="home-social-links" aria-label="作者主页">
+          <a href="https://v.douyin.com/7d08tVLOCJI/" target="_blank" rel="noopener noreferrer" aria-label="抖音：Dannnn🥚（无畏契约）">
+            <svg class="creator-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 3A5 5 0 0 0 21 7.8v3a8.3 8.3 0 0 1-4.5-1.4v6.5a6 6 0 1 1-5.2-5.9v3.1a3 3 0 1 0 2.2 2.8V3z" /></svg>
+            <span>Dannnn🥚（无畏契约）</span>
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href="https://space.bilibili.com/6035790" target="_blank" rel="noopener noreferrer" aria-label="B站：一枚蛋ovo">
+            <svg class="creator-social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="14" rx="3" /><path d="m8 2 3 4m5-4-3 4M8 11v3m8-3v3m-6 3h4" /></svg>
+            <span>一枚蛋ovo</span>
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href="https://afdian.com/a/Dannnn" target="_blank" rel="noopener noreferrer" aria-label="爱发电：Dannnn">
+            <svg class="creator-social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+            <span>爱发电</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    <div class="home-header-actions">
+      <a class="home-settings-link" href="performance-help-v011299.html" target="_blank" rel="noopener noreferrer">帧数低/卡顿点我看教程 →</a>
+      <span data-home-tools></span>
+    </div>
+    <a class="account-header-back" data-account-return hidden>返回训练场 →</a>
+  </header>
+  <main class="home-main" data-hub-home><p class="player-home-loading" role="status">正在准备训练场…</p><noscript>请启用 JavaScript 后进入训练。</noscript></main>
+  <main data-hub-maps hidden>
+    <nav class="hub-breadcrumb" aria-label="当前位置"><a data-home-link href="index-2.html">首页</a><span>/</span><span>地图练习</span></nav>
+    <div class="hub-page-heading"><div><h1>地图练习</h1><p>先选地图，再进入练习</p></div></div>
+    <div id="map-practice-host"></div>
+  </main>
+  <main data-hub-workshop hidden>
+    <nav class="hub-breadcrumb" aria-label="当前位置"><a data-home-link href="index-2.html">首页</a><span>/</span><span>实战演练</span></nav>
+    <div id="local-workshop-host"></div>
+  </main>
+  <main data-hub-account hidden>
+    <div id="account-page-host"></div>
+  </main>
+  <footer class="home-footer"><span>Dannnn 的训练场</span><span>练习 · 探索 · 挑战</span></footer>
+</section>
+
+
+<section id="private-mode-loading" aria-labelledby="private-mode-loading-title">
+  <div class="private-mode-loading-card">
+    <p class="private-mode-loading-brand">Dannnn的训练场</p>
+    <h1 id="private-mode-loading-title">正在进入模式</h1>
+    <div class="private-mode-loading-status"><span data-private-mode-loading-spinner aria-hidden="true"></span><p data-private-mode-loading-status role="status" aria-live="polite">正在准备页面…</p></div>
+    <div data-private-mode-loading-actions hidden><button data-private-mode-loading-retry type="button">重新加载</button><a data-private-mode-loading-home href="index-2.html">返回首页</a></div>
+  </div>
+</section>
+<div id="app">
+      <canvas id="scene" aria-label="第一人称三维训练场"></canvas>
+      <div id="frame-rate" class="frame-rate" aria-label="渲染帧率">FPS <b id="fps-value">—</b></div>
+      <div id="low-fps-notice" class="low-fps-notice" role="status" aria-live="polite" hidden>帧数较低，可到主页查看「使用前提示」中的设置教程。</div>
+      <div id="map-playable-note" class="map-playable-note" hidden>本地碰撞实验 · 非原版规则</div>
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="brand">
+            <a class="brand-home-link" data-home-link href="index-2.html" aria-label="返回训练场主页"><img class="brand-mark" src="../download.dannnn.me/native/c3e421b66eab6728/program/assets/logo-B8kVU23R3a70.png?raze-channel=public-cors-v1" width="38" height="38" alt="" decoding="async" draggable="false" /></a>
+            <div>
+              <a class="brand-home-link" data-home-link href="index-2.html"><strong>Dannnn🥚的训练场</strong></a>
+              <span id="active-mode-label" hidden>自由训练</span>
+              <nav class="brand-social-links" aria-label="作者主页">
+                <a href="https://v.douyin.com/7d08tVLOCJI/" target="_blank" rel="noopener noreferrer" aria-label="抖音：Dannnn🥚（无畏契约）">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 3A5 5 0 0 0 21 7.8v3a8.3 8.3 0 0 1-4.5-1.4v6.5a6 6 0 1 1-5.2-5.9v3.1a3 3 0 1 0 2.2 2.8V3z" /></svg>
+                  <span>Dannnn🥚（无畏契约）</span>
+                </a>
+                <a href="https://space.bilibili.com/6035790" target="_blank" rel="noopener noreferrer" aria-label="B站：一枚蛋ovo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="14" rx="3" /><path d="m8 2 3 4m5-4-3 4M8 11v3m8-3v3m-6 3h4" /></svg>
+                  <span>一枚蛋ovo</span>
+                </a>
+              </nav>
+            </div>
+          </div>
+          <button id="lesson-menu-button" class="lesson-menu-button" type="button" hidden><i></i>教学列表</button>
+          
+          <button id="map-menu-button" class="lesson-menu-button map-menu-button" type="button" aria-label="打开地图入口" hidden>
+            <i></i><span>地图入口 · <b id="active-map-label">基础训练场</b></span>
+          </button>
+        </div>
+      </header>
+
+      <aside class="telemetry panel" aria-label="角色状态">
+        <div class="panel-heading">
+          <span>角色状态</span>
+        </div>
+        <div class="metric metric-main">
+          <span>速度</span>
+          <strong><b id="speed">0.00</b> m/s</strong>
+        </div>
+        <div class="metric-grid">
+          <div class="metric">
+            <span>高度</span>
+            <strong id="height">0.00 m</strong>
+          </div>
+        </div>
+        <div class="velocity-bar"><i id="velocity-fill"></i></div>
+      </aside>
+
+      <aside id="custom-level-status" class="custom-level-status panel" aria-label="关卡目标与规则" hidden>
+        <span id="custom-level-mode">自建关卡 · 试玩</span>
+        <strong id="custom-level-title"></strong>
+        <p id="custom-level-objective"></p>
+        <div id="custom-level-progress" role="status" aria-live="polite"></div>
+        <small id="custom-level-help">R 重新试玩 · ESC 后在菜单返回编辑器</small>
+      </aside>
+
+      <aside class="calibration-panel panel" aria-label="轨迹标定记录" hidden>
+        <div class="panel-heading">
+          <span>轨迹标定</span>
+          <span id="calibration-status" class="calibration-status"><i></i>待机</span>
+        </div>
+        <div class="calibration-stats">
+          <span>轨迹帧<strong id="calibration-count">0</strong></span>
+          <span>事件<strong id="calibration-events">0</strong></span>
+          <span>时长<strong id="calibration-time">0.00 s</strong></span>
+        </div>
+        <p id="calibration-last-event">会自动标记投包、起爆与落地</p>
+        <div class="calibration-actions">
+          <button id="calibration-record" class="record-button" type="button">开始记录 <kbd data-control-hint="25">F8</kbd></button>
+          <button id="calibration-export" type="button" disabled>导出 CSV</button>
+          <button id="calibration-clear" type="button" disabled>清空</button>
+        </div>
+      </aside>
+
+      <aside class="objective panel">
+        <span id="lesson-eyebrow" class="eyebrow">自由模式</span>
+        <strong id="lesson-title">训练场自由练习</strong>
+        <p id="lesson-guidance">自由测试移动、炸药包、观察视角和动作回放。</p>
+        <div id="lesson-live" class="lesson-live" data-tone="idle" hidden>
+          <span>水平距离 <b id="lesson-horizontal">--</b></span>
+          <span>抬升角 <b id="lesson-angle">--</b></span>
+        </div>
+        <div id="relationship-lab" class="relationship-lab" hidden>
+          <div class="relationship-stage">
+            <span id="relationship-stage-count">位置 1 / 5</span>
+            <strong id="relationship-stage-title">炸药包在人物正下方</strong>
+          </div>
+          <span class="relationship-prompt">先预测起爆结果</span>
+          <div id="relationship-options" class="relationship-options">
+            <span data-relationship-prediction="up"><kbd>1</kbd>向上</span>
+            <span data-relationship-prediction="forward-up"><kbd>2</kbd>前上</span>
+            <span data-relationship-prediction="backward-up"><kbd>3</kbd>后上</span>
+            <span data-relationship-prediction="left-up"><kbd>4</kbd>左上</span>
+            <span data-relationship-prediction="right-up"><kbd>5</kbd>右上</span>
+          </div>
+          <small id="relationship-feedback">按数字选择，再按炸药包键验证</small>
+        </div>
+        <div class="objective-progress"><i></i><span id="objective-status">第一步：投放炸药包</span></div>
+      </aside>
+
+      <aside class="satchel-panel panel" aria-label="起爆反馈">
+        <span class="compact-blast-title">起爆反馈</span>
+        <div id="compact-blast-feedback" class="compact-blast-feedback" role="status" aria-live="polite" hidden>等待起爆</div>
+        <div id="compact-jump-summary" class="compact-jump-summary" aria-label="本次跳跃结果" hidden></div>
+        <div class="compact-blast-shortcuts">
+          <span><kbd data-control-hint="15">L</kbd> 查看人包关系</span>
+          <span><kbd data-control-hint="18">H</kbd> 查看跳跃回放</span>
+        </div>
+      </aside>
+
+      <aside class="observer-panel" aria-label="同步第三人称观察窗" hidden>
+        <div class="observer-heading">
+          <span>第三人称观察</span>
+          <span><i></i> 同步</span>
+        </div>
+        <div id="observer-viewport" class="observer-viewport" aria-hidden="true"></div>
+        <div class="observer-caption"><span class="legend-person">人物</span> · <span class="legend-satchel">炸药包</span></div>
+      </aside>
+
+      <aside class="relationship-panel" aria-label="人物与炸药包位置关系及引爆瞬间">
+        <section class="top-view-panel" aria-label="实时人包位置关系">
+        <div class="observer-heading">
+          <span>人包位置关系 <span class="observer-hide-hint"><kbd data-control-hint="15">L</kbd> 隐藏</span></span>
+          <span><i></i><b class="top-live-legend">朝向朝上</b><b class="top-replay-legend">朝向朝上</b></span>
+        </div>
+        <div id="top-viewport" class="observer-viewport" aria-hidden="true"></div>
+        <div class="observer-caption"><span class="top-live-legend"><span class="legend-person">朝向</span> · <span class="legend-origin">行进</span> · 1 m 网格<br><span class="legend-satchel">橙圈：距离范围，不含遮挡</span> · 高差以脚下为准</span><span class="top-replay-legend">1 m 网格 · 首爆点</span></div>
+        </section>
+        <section id="blast-snapshots" class="blast-snapshots" aria-label="引爆位置关系快照" hidden></section>
+        <div id="side-feedback" class="relationship-feedback" hidden>
+          <span id="side-result-summary" class="relationship-status"><i></i> 等待动作</span>
+          <section id="action-result" class="action-result" aria-label="本次动作结果" hidden>
+            <div class="action-result-heading">
+              <span>本次动作</span>
+              <strong id="result-pack-count">单包</strong>
+            </div>
+            <div class="action-result-metrics">
+              <span>飞行距离 <strong id="result-distance">0.00 m</strong></span>
+              <span>最高高度 <strong id="result-height">0.00 m</strong></span>
+              <span>飞行时间 <strong id="result-time">0.00 s</strong></span>
+            </div>
+            <div id="lesson-result" class="lesson-result" data-tone="retry">
+              <strong id="lesson-result-title">等待课程判定</strong>
+              <span id="lesson-result-score">0 分</span>
+              <p id="lesson-result-message">完成一次起爆并落地后显示建议。</p>
+            </div>
+          </section>
+          <div id="replay-ready" class="replay-ready" hidden>
+            <button id="replay-watch" type="button">观看回放 <kbd data-control-hint="18">H</kbd></button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="crosshair" aria-hidden="true"></div>
+      <div id="third-person-play-hint" class="third-person-play-hint" hidden>第三人称游玩 · <kbd data-control-hint="19">V</kbd> 返回第一人称</div>
+      <div id="landing-pulse" class="landing-pulse" aria-hidden="true"></div>
+      <div id="blast-flash" class="blast-flash" aria-hidden="true"></div>
+
+      <section id="replay-panel" class="replay-panel" aria-label="最近一次动作回放" hidden>
+        <div class="replay-heading">
+          <span>最近一次动作回放</span>
+          <strong id="replay-event-label">准备播放</strong>
+        </div>
+        <div class="replay-timeline">
+          <button id="replay-toggle" type="button" aria-label="播放或暂停">暂停 <kbd data-control-hint="9">SPACE</kbd></button>
+          <div class="replay-track">
+            <input id="replay-scrubber" type="range" min="0" max="1000" step="1" value="0" aria-label="回放时间轴" />
+            <div id="replay-markers" class="replay-markers" aria-hidden="true"></div>
+          </div>
+          <span id="replay-time">0.00 / 0.00</span>
+        </div>
+        <p id="replay-timing" class="replay-timing" hidden></p>
+        <div class="replay-actions">
+          <div class="replay-speeds" aria-label="回放速度">
+            <button data-replay-speed="0.25" type="button">0.25×</button>
+            <button data-replay-speed="0.5" type="button">0.5×</button>
+            <button class="active" data-replay-speed="1" type="button">1×</button>
+            <span class="replay-speed-hint">切换 <kbd data-control-hint="33">TAB</kbd></span>
+          </div>
+          <button id="replay-free-camera" type="button" aria-pressed="false">自由视角 <kbd data-control-hint="19">V</kbd></button>
+          <button id="replay-retry" type="button">回到动作起点</button>
+          <button id="replay-exit" type="button">退出回放 <kbd data-control-hint="18">H</kbd></button>
+        </div>
+        <div class="replay-free-camera-help" aria-label="自由视角操作提示">
+          <span><kbd>WASD</kbd> 移动</span>
+          <span><kbd>鼠标</kbd> 转向</span>
+          <span><kbd>Q</kbd> 上升</span>
+          <span><kbd>E</kbd> 下降</span>
+          <span><kbd>SHIFT</kbd> 加速</span>
+          <span><kbd data-control-hint="9">SPACE</kbd> 暂停／播放</span>
+          <span><kbd data-control-hint="19">V</kbd> 返回跟随视角</span>
+        </div>
+      </section>
+
+      <section id="lesson-menu" class="lesson-menu" aria-labelledby="lesson-menu-title" hidden>
+        <button class="lesson-menu-backdrop" data-close-lesson-menu type="button" aria-label="关闭教学列表"></button>
+        <div class="lesson-menu-dialog" role="dialog" aria-modal="true">
+          <div class="lesson-menu-heading">
+            <div>
+              <span>训练路线</span>
+              <h2 id="lesson-menu-title">选择模式或教学关卡</h2>
+            </div>
+            <button class="lesson-menu-close" data-close-lesson-menu type="button" aria-label="关闭">×</button>
+          </div>
+          <p>每一关使用独立的出生位置、场景障碍、目标与判定规则。</p>
+          <div id="lesson-list" class="lesson-list"></div>
+        </div>
+      </section>
+
+      <section id="map-menu" class="lesson-menu" aria-labelledby="map-menu-title" hidden>
+        <button class="lesson-menu-backdrop" data-close-map-menu type="button" aria-label="关闭地图选择"></button>
+        <div class="lesson-menu-dialog map-menu-dialog" role="dialog" aria-modal="true">
+          <div class="lesson-menu-heading">
+            <div>
+              <span>自由训练地图</span>
+              <h2 id="map-menu-title">选择地图</h2>
+            </div>
+            <button class="lesson-menu-close" data-close-map-menu type="button" aria-label="关闭">×</button>
+          </div>
+          <p>下载后保存在当前浏览器，可再次直接进入。切换地图后回到出生点。</p>
+          <div id="map-list" class="lesson-list map-list"></div>
+        </div>
+      </section>
+
+      <section id="relationship-sandbox" class="relationship-sandbox" aria-labelledby="relationship-sandbox-title" hidden>
+        <div class="relationship-sandbox-shell">
+          <header class="sandbox-heading">
+            <div>
+              <span>第 1 课 · 规律展示与自由实验</span>
+              <h2 id="relationship-sandbox-title">炸药包位置关系沙盘</h2>
+              <p>拖动橙色炸药包，分别从顶视图判断方向、从侧视图判断高度，然后模拟起爆。</p>
+            </div>
+            <button id="sandbox-close" type="button">返回教学列表</button>
+          </header>
+
+          <div class="sandbox-presets" aria-label="典型位置">
+            <button data-sandbox-preset="below" class="active" type="button">正下方</button>
+            <button data-sandbox-preset="behind" type="button">后下方</button>
+            <button data-sandbox-preset="ahead" type="button">前下方</button>
+            <button data-sandbox-preset="left" type="button">左下方</button>
+            <button data-sandbox-preset="right" type="button">右下方</button>
+          </div>
+
+          <div class="sandbox-views">
+            <article class="sandbox-view-card">
+              <header><strong>顶视图</strong><span>判断前后左右</span></header>
+              <div id="sandbox-top-view" class="sandbox-view sandbox-top-view">
+                <span class="sandbox-axis forward">前</span><span class="sandbox-axis back">后</span>
+                <span class="sandbox-axis left">左</span><span class="sandbox-axis right">右</span>
+                <svg id="sandbox-top-path" aria-hidden="true"><path></path></svg>
+                <i class="sandbox-person sandbox-person-top"></i>
+                <button class="sandbox-pack sandbox-pack-top" type="button" aria-label="拖动炸药包"></button>
+              </div>
+            </article>
+            <article class="sandbox-view-card">
+              <header><strong>侧视图</strong><span>判断上下角度</span></header>
+              <div id="sandbox-side-view" class="sandbox-view sandbox-side-view">
+                <span class="sandbox-axis high">高</span><span class="sandbox-axis floor">地面</span>
+                <svg id="sandbox-side-path" aria-hidden="true"><path></path></svg>
+                <i class="sandbox-person sandbox-person-side"></i>
+                <button class="sandbox-pack sandbox-pack-side" type="button" aria-label="拖动炸药包"></button>
+              </div>
+            </article>
+          </div>
+
+          <div class="sandbox-analysis">
+            <div class="sandbox-force-bars">
+              <label>水平推力 <span id="sandbox-horizontal-value">0%</span><i><b id="sandbox-horizontal-fill"></b></i></label>
+              <label>向上推力 <span id="sandbox-vertical-value">100%</span><i><b id="sandbox-vertical-fill"></b></i></label>
+            </div>
+            <div class="sandbox-conclusion">
+              <span>模拟结论</span>
+              <strong id="sandbox-result-title">炸药包在人物正下方</strong>
+              <p id="sandbox-result-copy">先观察两个视图，再点击“模拟起爆”验证你的判断。</p>
+            </div>
+            <div class="sandbox-actions">
+              <button id="sandbox-simulate" class="sandbox-simulate" type="button">模拟起爆</button>
+              <button id="sandbox-start-challenge" type="button">进入第一人称预测练习</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="start-overlay" class="start-overlay">
+        <div class="start-shell">
+          <div class="start-layout">
+          <div class="start-sidebar">
+          <aside class="usage-notice" aria-labelledby="usage-notice-title">
+            <h2 id="usage-notice-title">👋 使用前提示</h2>
+            <section class="usage-section" aria-labelledby="usage-runtime-title">
+              <h3 id="usage-runtime-title">💻 运行建议</h3>
+              <ul>
+                <li>建议使用 <strong>Edge 或 Chrome</strong>。遇到<strong>帧数低、画面卡顿或右键操作异常</strong>？<a class="performance-help-link" href="performance-help-v011299.html" target="_blank" rel="noopener noreferrer">查看设置教程 ↗</a></li>
+                <li>首次进入时部分资源需要加载，请稍等片刻。</li>
+              </ul>
+              <div class="usage-desktop-card">
+                <div class="usage-desktop-copy"><strong>若使用浏览器卡顿，可使用桌面版</strong><a class="usage-desktop-download" href="https://pan.quark.cn/s/ea1bd9b808fa" target="_blank" rel="noopener noreferrer">点击下载 ↗</a></div>
+                <div class="usage-desktop-groups" aria-label="交流群">
+                  <span>群：</span><strong>1131606033</strong>
+                  <span>KOOK：</span><strong>71805807</strong>
+                </div>
+              </div>
+            </section>
+            <section class="usage-section" aria-labelledby="usage-simulator-title">
+              <h3 id="usage-simulator-title">💣 关于模拟器</h3>
+              <p>本工具主要用于练习和理解 <strong>Raze 炸药包的使用方式、位移效果与飞行规律</strong>。</p>
+              <p>模拟器会尽可能贴近游戏内的实际体验，但由于游戏版本更新及模拟误差等因素，<strong>模拟结果仅供训练参考，实际效果请以游戏内为准。</strong></p>
+              <p class="usage-disclaimer">非 Riot Games 官方产品。本项目为玩家制作的训练工具，与 Riot Games 不存在官方合作或隶属关系。</p>
+            </section>
+            <section class="usage-section" aria-labelledby="usage-feedback-title">
+              <h3 id="usage-feedback-title">🐛 反馈与联系</h3>
+              <p class="usage-feedback">Bug / 建议：可在抖音群、交流群或 KOOK 反馈。</p>
+              <p class="usage-contact">联系作者：<a href="mailto:dannnn1222@qq.com"><strong>dannnn1222@qq.com</strong></a></p>
+            </section>
+          </aside>
+            <section class="usage-support-card" aria-labelledby="usage-support-title">
+              <h2 id="usage-support-title">🥚 支持一下主包</h2>
+              <p>模拟器制作不易，如果觉得好用，麻烦给主包点个关注 T.T</p>
+              <div class="creator-links" aria-label="作者账号">
+                <a href="https://v.douyin.com/7d08tVLOCJI/" target="_blank" rel="noopener noreferrer" aria-label="抖音：Dannnn🥚（无畏契约）">
+                  <svg class="creator-social-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 3A5 5 0 0 0 21 7.8v3a8.3 8.3 0 0 1-4.5-1.4v6.5a6 6 0 1 1-5.2-5.9v3.1a3 3 0 1 0 2.2 2.8V3z" /></svg>
+                  <span>Dannnn🥚（无畏契约）</span>
+                </a>
+                <a href="https://space.bilibili.com/6035790" target="_blank" rel="noopener noreferrer" aria-label="B站：一枚蛋ovo">
+                  <svg class="creator-social-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="14" rx="3" /><path d="m8 2 3 4m5-4-3 4M8 11v3m8-3v3m-6 3h4" /></svg>
+                  <span>一枚蛋ovo</span>
+                </a>
+                <a href="https://afdian.com/a/Dannnn" target="_blank" rel="noopener noreferrer" aria-label="爱发电：Dannnn">
+                  <svg class="creator-social-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+                  <span>爱发电</span>
+                </a>
+              </div>
+            </section>
+          </div>
+          <div class="start-card start-setup"><a class="home-return" data-home-link data-training-return href="index-2.html">← 返回主页</a>
+          <span id="start-mode-step" class="step">自由模式</span>
+          <h1 id="start-mode-title">Dannnn🥚的训练场</h1>
+          <p id="start-mode-description" hidden></p>
+          <section id="map-playable-settings" class="map-playable-settings" hidden>
+            <label for="map-playable-region">测试起点</label>
+            <select id="map-playable-region">
+              <option value="b">B 点</option>
+              <option value="b-attack">B 点进攻通道</option>
+              <option value="b-defense">B 点防守通道</option>
+            </select>
+            <div class="map-render-setting">
+              <label for="map-visual-style">地图外观</label>
+              <select id="map-visual-style">
+                <option value="original">原版贴图 · 实验</option>
+              </select>
+              <small>切换外观会重新加载，保留起点。</small>
+            </div>
+            <div class="map-render-setting">
+              <label for="map-material-layers">贴图混合</label>
+              <select id="map-material-layers">
+                <option value="single">单层主贴图 · 精简</option>
+              </select>
+              <small>仅原版贴图外观生效；保留主颜色与必要透明遮罩，去掉第二层混合。切换会重新加载。</small>
+            </div>
+            <div class="map-render-setting">
+              <label for="map-material-lighting">材质光照</label>
+              <select id="map-material-lighting">
+                <option value="light">轻量漫反射 · 原版保色</option>
+              </select>
+              <small>保留贴图颜色、基本明暗和必要透明遮罩，减少高光计算；不改碰撞与手感。切换会重新加载。</small>
+            </div>
+            <div class="map-render-setting">
+              <label for="map-environment">地图环境</label>
+              <select id="map-environment">
+                <option value="native-light" disabled>原版太阳＋环境光适配 · 实验</option>
+              </select>
+              <small>使用游戏太阳方向、颜色和浮点环境贴图，亮度与反弹补光为网页近似适配，尚未恢复原版烘焙光照。阴影暂限 B 区，不改碰撞和手感。</small>
+            </div>
+            <div class="map-render-setting">
+              <label for="map-sky">天空背景</label>
+              <select id="map-sky">
+                <option value="original">原版天空贴图 · 静态实验</option>
+              </select>
+              <small>原始蓝天贴图、天空模型和 UV；暂未恢复云流动与原版烘焙阴影。环境光可单独选择，仅配置了天空资源的本地服务可用。</small>
+            </div>
+            <div class="map-render-setting">
+              <label for="map-decoration">地图装饰</label>
+              <select id="map-decoration">
+                <option value="clean">精简装饰 · 无碰撞物件</option>
+              </select>
+              <small>隐藏已确认无查询碰撞的草、花、藤蔓和碎屑；不改人物与炸药包碰撞。切换会重新加载。</small>
+            </div>
+            <div id="map-render-pilot-setting" class="map-render-setting" hidden>
+              <label for="map-render-pilot">渲染优化 · 实验</label>
+              <select id="map-render-pilot">
+                <option value="off">关闭 · 对比原效果</option>
+                <option value="batch">原版贴图合批</option>
+                <option value="lod">远景模型简化</option>
+                <option value="both">贴图合批＋远景简化</option>
+              </select>
+              <small>只改显示；近景保留原模型，碰撞和手感不变。切换会重新加载。</small>
+            </div>
+            <small id="map-playable-progress">加载地图中…</small>
+          </section>
+          <div class="player-settings">
+          <div class="aim-settings" aria-label="鼠标灵敏度设置">
+            <div class="setting-heading">
+              <span>VALORANT 灵敏度</span>
+            </div>
+            <div class="setting-row">
+              <label for="val-sensitivity">
+                <span>游戏内灵敏度</span>
+                <input id="val-sensitivity" type="number" min="0.01" max="10" step="0.001" value="0.4" inputmode="decimal" />
+              </label>
+              <input id="sensitivity-slider" aria-label="游戏内灵敏度滑块" type="range" min="0.05" max="1.5" step="0.001" value="0.4" />
+            </div>
+            <small>填入与 VALORANT 相同的游戏内灵敏度。</small>
+          </div>
+          <div class="audio-settings" aria-label="音效设置">
+            <div class="setting-heading">
+              <span>音效设置</span>
+            </div>
+            <div class="audio-volume-grid">
+              <label for="master-volume">
+                <span>主音量</span>
+                <input id="master-volume" type="range" min="0" max="100" step="1" value="70" />
+                <output id="master-volume-value" for="master-volume">70%</output>
+              </label>
+              <label for="character-voice-volume">
+                <span>人物语音</span>
+                <input id="character-voice-volume" type="range" min="0" max="100" step="1" value="100" />
+                <output id="character-voice-volume-value" for="character-voice-volume">100%</output>
+              </label>
+            </div>
+          </div>
+          <div class="movement-profile-settings" aria-label="持枪手设置">
+            <label for="weapon-hand">持枪手</label>
+            <select id="weapon-hand"><option value="right">右手</option><option value="left">左手</option></select>
+          </div>
+          <div class="bind-settings" aria-label="自定义按键设置">
+            <button id="open-crosshair" class="keybindings-open" type="button">准星设置 <span aria-hidden="true">›</span></button>
+            <button id="open-keybindings" class="keybindings-open" type="button">按键设置 <span id="unbound-summary"></span><span aria-hidden="true">›</span></button>
+          </div>
+          </div>
+          <dialog id="crosshair-dialog" class="keybindings-dialog crosshair-dialog" aria-labelledby="crosshair-title">
+            <div class="lesson-menu-heading crosshair-heading">
+              <div><h2 id="crosshair-title">准星设置</h2><p>边调边看，修改后自动保存</p></div>
+              <button id="crosshair-close" class="lesson-menu-close" type="button" aria-label="关闭准星设置">×</button>
+            </div>
+            <div class="crosshair-workspace">
+              <aside class="crosshair-preview-panel" aria-label="预览与准星代码">
+                <div class="crosshair-panel-heading"><strong>实时预览</strong><span>实际像素大小</span></div>
+                <div id="crosshair-preview" class="crosshair-preview" aria-label="准星预览"></div>
+                <p id="crosshair-profile-note" class="crosshair-profile-note"></p>
+                <div class="crosshair-code-panel">
+                  <label class="crosshair-code-label" for="crosshair-code">VALORANT 准星代码</label>
+                  <textarea id="crosshair-code" rows="3" maxlength="4096" spellcheck="false" placeholder="粘贴准星代码，再点击导入" aria-describedby="crosshair-code-help"></textarea>
+                  <div class="crosshair-actions"><button id="crosshair-import" type="button">导入代码</button><button id="crosshair-export" type="button">复制代码</button></div>
+                  <p id="crosshair-code-help">可直接导入游戏中的准星代码。</p>
+                </div>
+              </aside>
+              <div class="crosshair-editor">
+                <div class="crosshair-editor-toolbar">
+                  <label for="crosshair-section">当前编辑</label>
+                  <select id="crosshair-section"><option value="P">主准星</option><option value="A">开镜准星</option><option value="S">狙击瞄准点</option></select>
+                </div>
+                <div class="crosshair-editor-scroll">
+                  <div id="crosshair-fields" class="crosshair-fields"></div>
+                  <details class="crosshair-profile-options">
+                    <summary>开镜准星的使用方式</summary>
+                    <label><input id="crosshair-advanced" type="checkbox" /> 启用独立开镜设置</label>
+                    <label><input id="crosshair-use-primary" type="checkbox" checked /> 开镜沿用主准星</label>
+                    <p>启用独立设置，并关闭“沿用主准星”，才会使用开镜准星。</p>
+                  </details>
+                </div>
+              </div>
+            </div>
+            <div class="crosshair-footer"><p id="crosshair-status" role="status" aria-live="polite"></p><button id="crosshair-reset" type="button">恢复默认</button></div>
+          </dialog>
+          <dialog id="keybindings-dialog" class="keybindings-dialog" aria-labelledby="keybindings-title">
+            <div class="lesson-menu-heading"><h2 id="keybindings-title">按键设置</h2><button id="keybindings-close" class="lesson-menu-close" type="button" aria-label="关闭按键设置">×</button></div>
+            <div class="binding-wheel-options">
+            <label class="toggle-row" for="scroll-jump-enabled">
+              <span>
+                <strong>启用滚轮跳</strong>
+                <small>上滚轮和下滚轮均可跳跃</small>
+              </span>
+              <input id="scroll-jump-enabled" type="checkbox" checked />
+              <i aria-hidden="true"></i>
+            </label>
+            <label class="toggle-row" for="scroll-weapon-enabled">
+              <span>
+                <strong>启用滚轮切枪</strong>
+                <small>上滚上一把，下滚下一把；与滚轮跳互斥</small>
+              </span>
+              <input id="scroll-weapon-enabled" type="checkbox" />
+              <i aria-hidden="true"></i>
+            </label>
+            <label class="toggle-row" for="scroll-weapon-reversed">
+              <span>
+                <strong>反向滚轮切枪</strong>
+                <small>上滚下一把，下滚上一把；仅切枪生效</small>
+              </span>
+              <input id="scroll-weapon-reversed" type="checkbox" disabled />
+              <i aria-hidden="true"></i>
+            </label>
+            <label class="toggle-row" for="scroll-weapon-looping">
+              <span>
+                <strong>滚轮切枪循环</strong>
+                <small>开启后首尾循环；关闭后到首尾停止切换</small>
+              </span>
+              <input id="scroll-weapon-looping" type="checkbox" checked disabled />
+              <i aria-hidden="true"></i>
+            </label>
+            </div>
+            <p id="binding-help" role="status" aria-live="polite">每个动作可绑定两个键；点击槽位后输入，Delete 清除该槽，Esc 取消。</p>
+            <div id="keybindings-grid" class="binding-grid"></div>
+            <small>支持键盘、鼠标按钮和滚轮；改键时会临时锁定鼠标。橙色表示未绑定。</small>
+            <button id="keybindings-reset" class="keybindings-reset" type="button">恢复默认按键</button>
+          </dialog>
+          <dialog id="binding-conflict" class="binding-conflict" aria-labelledby="binding-conflict-title">
+            <h2 id="binding-conflict-title">按键冲突</h2><p id="binding-conflict-message"></p>
+            <div class="binding-conflict-actions"><button id="binding-conflict-cancel" type="button">取消，保留原绑定</button><button id="binding-conflict-confirm" type="button">确认共用</button></div>
+          </dialog>
+          <div class="entry-feedback">
+          <section id="resource-preparation" class="resource-preparation" aria-label="资源准备进度" data-phase="boot">
+            <div class="resource-preparation-heading"><span>正在加载启动程序</span><b id="resource-preparation-percent">加载中</b></div>
+            <div id="resource-preparation-progress" class="resource-preparation-track" role="progressbar" aria-label="正在加载启动程序" aria-valuemin="0" aria-valuemax="100"><i id="resource-preparation-fill"></i></div>
+            <p id="resource-preparation-stage" role="status">正在下载并启动程序…</p>
+            <div id="resource-preparation-transfer" class="resource-transfer-details">启动后显示模型、音频与特效的准备进度</div>
+          </section>
+          <p id="entry-status" class="entry-status" role="status" aria-live="polite" hidden></p>
+          </div>
+          <button id="start-button" type="button" disabled>
+            <span>资源准备中…</span>
+            <kbd data-control-hint="17" hidden>ENTER</kbd>
+          </button>
+          <div class="controls">
+            <div><span class="key-cluster"><kbd>W</kbd><span><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span></span><b>移动</b></div>
+            <div><span class="mouse-icon"></span><b>控制视角</b></div>
+            <div><kbd class="space-key" data-control-hint="9">SPACE</kbd><b>跳跃</b></div>
+            <div><span class="action-keys"><kbd id="control-binding-one">Q</kbd><kbd id="control-binding-two">侧键2</kbd></span><b>再按一次引爆</b></div>
+          </div>
+          <button class="controls-help-button" data-open-controls-help type="button">操作帮助 <kbd data-control-hint="24">F1</kbd></button>
+          
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="helpbar">
+        <span><kbd data-control-hint="29">中键</kbd> 超级跳</span>
+        <span><kbd data-control-hint="16">R</kbd> 回到上一次起跳点</span>
+        <span><kbd data-control-hint="18">H</kbd> 查看跳跃回放</span>
+        <span><kbd data-control-hint="6">5</kbd> 存点</span>
+        <span><kbd data-control-hint="7">6</kbd> 读点</span>
+        <span><kbd data-control-hint="34">Caps Lock</kbd> 幽灵模式</span>
+        <span><kbd data-control-hint="8">T</kbd> 喷漆</span>
+        <span id="perspective-play-help" hidden><kbd data-control-hint="19">V</kbd> 第三／第一人称</span>
+        <span id="observation-toggle-hint" hidden><kbd data-control-hint="15">L</kbd> <span id="observation-toggle-label">显示观察窗</span></span>
+        <span><kbd data-control-hint="32">P</kbd> 旋转跳反馈</span>
+        <span id="fullscreen-exit-hint" hidden><kbd>ESC</kbd> 长按退出全屏</span>
+        <button class="controls-help-button" data-open-controls-help type="button">帮助 <kbd data-control-hint="24">F1</kbd></button>
+      </footer>
+
+      <dialog id="controls-help" class="controls-help" aria-labelledby="controls-help-title">
+        <div class="lesson-menu-heading">
+          <h2 id="controls-help-title">操作帮助</h2>
+          <button id="controls-help-close" class="lesson-menu-close" type="button" aria-label="关闭操作帮助">×</button>
+        </div>
+        <div class="controls-help-keys">
+          <span><kbd>WASD</kbd> 移动</span>
+          <span><kbd>鼠标</kbd> 控制视角</span>
+          <span><kbd data-control-hint="9">SPACE</kbd> 跳跃</span>
+          <span id="scroll-jump-hint" hidden><kbd data-control-hint="27">滚轮 ↑</kbd> / <kbd data-control-hint="28">滚轮 ↓</kbd> 跳跃</span>
+          <span><kbd data-control-hint="10">Shift</kbd> 静步（按住）</span>
+          <span><kbd data-control-hint="2">Ctrl</kbd> 蹲下（按住）</span>
+          <span><kbd data-control-hint="0">Q</kbd> 炸药包主要按键</span>
+          <span><kbd data-control-hint="1">侧键2</kbd> 炸药包备用按键</span>
+          <span><kbd data-control-hint="3">X</kbd> 大招</span>
+          <span><kbd data-control-hint="29">中键</kbd> 超级跳</span>
+          <span><kbd data-control-hint="4">1</kbd> 主武器</span>
+          <span><kbd data-control-hint="5">2</kbd> 副武器</span>
+          <span><kbd data-control-hint="11">3</kbd> 近战武器</span>
+          <span><kbd data-control-hint="12">左键</kbd> 射击／近战攻击</span>
+          <span><kbd data-control-hint="13">右键</kbd> 副武器散射／近战重击</span>
+          <span><kbd data-control-hint="14">Y</kbd> 检视武器</span>
+          <span><kbd data-control-hint="6">5</kbd> 存点</span>
+          <span><kbd data-control-hint="7">6</kbd> 读点</span>
+          <span><kbd data-control-hint="15">L</kbd> 显示／隐藏观察窗</span>
+          <span><kbd data-control-hint="16">R</kbd> 返回：跟练起点／跳点存档点／最近起跳前 1 秒</span>
+          <span><kbd data-control-hint="17">ENTER</kbd> 进入／继续训练</span>
+          <span><kbd data-control-hint="26">ESC</kbd> 暂停／释放鼠标／退出回放</span>
+          <span><kbd data-control-hint="18">H</kbd> 回放／退出回放</span>
+          <span><kbd data-control-hint="8">T</kbd> 喷漆</span>
+          <span id="perspective-key-help"><kbd data-control-hint="19">V</kbd> 回放自由视角</span>
+          <span><kbd data-control-hint="9">SPACE</kbd> 回放：播放／暂停</span>
+          <span><kbd data-control-hint="20">←</kbd> / <kbd data-control-hint="21">→</kbd> 回放：后退／前进</span>
+          <span><kbd data-control-hint="22">Q</kbd> / <kbd data-control-hint="23">E</kbd> 自由视角：上升／下降</span>
+          <span><kbd data-control-hint="10">Shift</kbd> 自由视角：加速</span>
+          <span><kbd data-control-hint="24">F1</kbd> 打开／关闭操作帮助</span>
+          <span><kbd>Delete / ⌫</kbd> 改键：清除绑定</span>
+          <span><kbd>ESC</kbd> 改键：取消</span>
+          <span id="calibration-key-help" hidden><kbd data-control-hint="25">F8</kbd> 标定：录制／停止</span>
+          <span id="prediction-key-help" hidden><kbd>1–5</kbd> 方向预测：选择答案</span>
+        </div>
+      </dialog>
+
+      <div id="toast" class="toast" role="status">位置已重置</div>
+      <div id="cooldown-warning" class="cooldown-warning" role="alert" aria-live="assertive" hidden>
+        <span>刚才第二包投放过早</span>
+        <strong id="cooldown-warning-time">当时还差 0.00 秒</strong>
+      </div>
+    </div>
+    
+    <script data-boot-progress="">(function startBootProgress(document, window) {
+  if (document.documentElement?.dataset.surface === 'home') return;
+  const panel = document.querySelector('#resource-preparation');
+  const stage = document.querySelector('#resource-preparation-stage');
+  if (!panel || !stage || panel.dataset.phase !== 'boot') return;
+  const started = Date.now();
+  const update = () => {
+    if (panel.dataset.phase !== 'boot') { window.clearInterval(timer); return; }
+    const seconds = Math.floor((Date.now() - started) / 1000);
+    stage.textContent = seconds < 15 ? '正在下载并启动程序…' : `正在下载并启动程序，已等待 ${seconds} 秒。网络较慢时请稍候；长时间无变化可刷新重试。`;
+  };
+  const timer = window.setInterval(update, 1000);
+  update();
+})(document,window);(function startTrainingPageLoading(document, window) {
+  const root=document.documentElement,shell=document.querySelector('#training-page-loading');
+  if(!shell)return;
+  const excluded=()=>root.dataset.surface==='home'||['privateModeLoading','scenarioSurface','pidanSurface','parkourChallengeSurface'].some(key=>root.dataset[key]!==undefined);
+  if(excluded()){shell.remove();return;}
+  const retry=shell.querySelector('[data-training-page-retry]'),message=shell.querySelector('[data-training-page-message]');
+  let timer,timeout,fade,frame,stopped=false,finishing=false;
+  const cleanup=()=>{window.clearInterval(timer);window.clearTimeout(timeout);window.clearTimeout(fade);window.cancelAnimationFrame(frame);};
+  const remove=()=>{stopped=true;cleanup();shell.remove();};
+  retry.addEventListener('click',()=>window.location.reload());
+  const check=()=>{
+    if(stopped||finishing)return;
+    if(excluded()||!shell.isConnected){remove();return;}
+    if(window.getComputedStyle(root).getPropertyValue('--training-ui-ready').trim()!=='1')return;
+    finishing=true;window.clearInterval(timer);window.clearTimeout(timeout);
+    // Give the styled document a paint before fading; no minimum loading delay.
+    frame=window.requestAnimationFrame(()=>{frame=window.requestAnimationFrame(()=>{
+      root.dataset.trainingPageReady='';retry.hidden=true;
+      fade=window.setTimeout(remove,200);
+    });});
+  };
+  timer=window.setInterval(check,50);
+  timeout=window.setTimeout(()=>{
+    if(stopped||finishing)return;
+    message.textContent='界面加载较慢，请检查网络后重试。';retry.hidden=false;
+    shell.querySelector('[data-training-page-spinner]').hidden=true;
+  },20000);
+  check();
+})(document,window);</script>
+  </body>
+
+<!-- Mirrored from https://raze.dannnn.me/ by HTTrack Website Copier/3.x [XR&CO], Tue, 03 Nov 2026 06:34:28 GMT -->
+</html>

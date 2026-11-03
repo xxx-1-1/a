@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<!-- Mirrored from https://raze.dannnn.me/performance-help-v011299.html by HTTrack Website Copier/3.x [XR&CO], Tue, 03 Nov 2026 06:34:28 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="训练场帧数低、画面卡顿的排查步骤：使用 Edge 或 Chrome、开启图形加速、选择高性能显卡。" />
+  <title>帧数低怎么办 · Dannnn 的训练场</title>
+  <style>
+    :root{color-scheme:dark;--bg:#111418;--panel:#1a1e24;--line:#313740;--text:#edf0f4;--muted:#aab3bf;--accent:#6ce2d2;--orange:#ffac77}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Microsoft YaHei UI",sans-serif;line-height:1.8}
+    main{max-width:900px;margin:auto;padding:44px 24px 56px}a{color:var(--accent);text-underline-offset:4px}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+    .eyebrow{margin:0;color:var(--accent);font-size:12px;letter-spacing:.15em}.intro h1{font-size:clamp(28px,5vw,42px);line-height:1.25;margin:12px 0 16px}.intro>p:last-child{color:var(--muted);max-width:680px}
+    nav{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px}nav a{padding:7px 13px;border:1px solid var(--line);border-radius:7px;color:var(--text);font-size:13px;text-decoration:none}nav a:hover{border-color:var(--accent)}
+    .step{margin-top:18px;padding:26px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.step-heading{display:flex;gap:14px;align-items:center;margin-bottom:14px}.number{display:grid;place-items:center;width:36px;height:36px;flex:none;border:1px solid #3d766f;border-radius:9px;color:var(--accent);font-weight:750;font-size:17px}
+    h2{font-size:21px;line-height:1.4;margin:0}h3{font-size:15px;margin:18px 0 8px}p{margin:10px 0}.muted,small{color:var(--muted)}ol,ul{margin:10px 0;padding-left:24px}li+li{margin-top:7px}
+    .browsers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0}.browser{padding:15px;border:1px solid var(--line);border-radius:8px;background:#14181d}.browser strong{display:block;margin-bottom:6px}
+    code{color:#d7f8f1;font-family:ui-monospace,Consolas,monospace;font-size:.92em;overflow-wrap:anywhere}.browser code{display:block;padding:6px 9px;background:#0d1116;border-radius:5px;user-select:all}.browser small{display:block;margin-top:6px}
+    .note{padding:12px 15px;margin-top:17px;border-left:3px solid var(--accent);background:#142b29;color:#d3e7e3;font-size:14px}.note.warn{border-color:var(--orange);background:#30261f;color:#efd7c4}.path{padding:12px 16px;background:#101419;border-radius:7px;font-weight:600;overflow-wrap:anywhere}
+    details{margin-top:22px;padding:18px 22px;border:1px solid var(--line);border-radius:10px}summary{cursor:pointer;font-weight:650}details p,details li{font-size:14px;color:var(--muted)}footer{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}footer a{display:inline-block;margin:0 14px 6px 0}
+    figure{margin:20px 0 0}figure img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px}figcaption{margin-top:8px;color:var(--muted);font-size:12px}.extra-label{color:var(--orange);font-size:12px;letter-spacing:.08em;margin-top:30px}
+    @media(max-width:580px){main{padding:28px 16px 36px}.step{padding:19px 17px}.browsers{grid-template-columns:1fr}h2{font-size:19px}.step-heading{align-items:flex-start;gap:11px}nav{gap:7px}nav a{padding:6px 10px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <p class="eyebrow">DANNNN · 训练场帮助</p>
+    <h1>帧数低、画面卡顿怎么办？</h1>
+    <p>先按下面三步排查浏览器和显卡设置。每完成一步，回到同一场景比较帧数即可；不需要重装系统，也不用先改游戏手感。</p>
+  </header>
+  <nav aria-label="排查步骤">
+    <a href="#browser">01 选择浏览器</a><a href="#acceleration">02 开启图形加速</a><a href="#gpu">03 使用独显</a><a href="#gestures">右键操作异常</a>
+  </nav>
+  <section class="step" id="browser" aria-labelledby="browser-title">
+    <div class="step-heading"><span class="number" aria-hidden="true">1</span><h2 id="browser-title">使用 Edge 或 Chrome 打开</h2></div>
+    <p>建议使用更新后的 <strong>Microsoft Edge</strong> 或 <strong>Google Chrome</strong>，把训练场网址复制到浏览器中打开。</p>
+    <p class="muted">如果当前在聊天软件、社交应用或其他软件的内置浏览器里，请先换到完整的 Edge／Chrome 再测试。</p>
+    <div class="note">首次进入会下载、解码资源并准备画面。请等资源准备完成后，再判断实际游玩帧数；下载慢不等于渲染帧数低。</div>
+  </section>
+  <section class="step" id="acceleration" aria-labelledby="acceleration-title">
+    <div class="step-heading"><span class="number" aria-hidden="true">2</span><h2 id="acceleration-title">开启浏览器图形加速</h2></div>
+    <ol>
+      <li>打开浏览器设置，搜索<strong>“图形加速”</strong>，部分版本称为“硬件加速”。</li>
+      <li>开启<strong>“使用图形加速（如果可用）”</strong>或类似名称的开关。</li>
+      <li>保存正在使用的页面，<strong>重启浏览器</strong>后再打开训练场。只刷新网页不会应用所有设置。</li>
+    </ol>
+    <div class="browsers">
+      <div class="browser"><strong>Microsoft Edge</strong><code>edge://settings/system</code><small>复制上方地址，粘贴到 Edge 地址栏打开。</small></div>
+      <div class="browser"><strong>Google Chrome</strong><code>chrome://settings/system</code><small>复制上方地址，粘贴到 Chrome 地址栏打开。</small></div>
+    </div>
+    <p class="muted">版本不同，设置位置和文字可能略有差别；直接搜索“图形加速”通常更容易找到。</p>
+    <figure><img src="../download.dannnn.me/native/c3e421b66eab6728/program/assets/performance-help-browser-acceleration-d975642a14237a273a70.png?raze-channel=public-cors-v1" width="847" height="364" loading="lazy" decoding="async" alt="浏览器设置中搜索图形加速，在可用时使用图形加速的开关处于开启状态" /><figcaption>图示：搜索“图形加速”，将对应开关打开，然后按提示重新启动浏览器。</figcaption></figure>
+  </section>
+  <section class="step" id="gpu" aria-labelledby="gpu-title">
+    <div class="step-heading"><span class="number" aria-hidden="true">3</span><h2 id="gpu-title">仍然卡？在 Windows 中选择高性能显卡</h2></div>
+    <p><strong>这一步适用于电脑同时有核显和独显的情况。</strong> 图形加速已开启，也可能仍在使用核显。</p>
+    <p class="path">Win + I → 系统 → 显示 → 图形</p>
+    <ol>
+      <li>找到实际运行训练场的 <strong>Edge／Chrome</strong>。列表里没有时，添加“桌面应用”，选择 <code>msedge.exe</code>／<code>chrome.exe</code>。</li>
+      <li>打开该应用的<strong>“选项／图形首选项”</strong>，选择<strong>“高性能”</strong>。</li>
+      <li>核对旁边标注的显卡型号，确认它是你要使用的<strong>独立显卡</strong>，然后保存。“GPU 0／GPU 1”这个编号本身不能区分核显和独显。</li>
+      <li>保存页面后<strong>完全退出浏览器，再重新打开</strong>，重新进入训练场比较。</li>
+    </ol>
+    <p class="muted">不知道浏览器程序在哪里？可以在任务管理器中右键对应浏览器进程，选择“打开文件所在的位置”。Windows 版本不同，选项名称可能稍有区别。</p>
+    <figure><img src="../download.dannnn.me/native/c3e421b66eab6728/program/assets/performance-help-windows-gpu-89db6b98d969094b3a70.png?raze-channel=public-cors-v1" width="694" height="362" loading="lazy" decoding="async" alt="Windows 图形设置中为 Google Chrome 选择高性能 NVIDIA GeForce RTX 5070 Ti" /><figcaption>图示：为实际使用的浏览器选择“高性能”。RTX 5070 Ti 只是此截图的示例，请以自己电脑的显卡型号为准；“窗口化游戏优化”不等于独显选择。</figcaption></figure>
+    <div class="note warn"><strong>只有核显怎么办？</strong> 如果系统没有识别到另一张独显，就没有可切换的目标；选择“高性能”不会凭空增加独显。也不要因为使用核显，就认定所有卡顿一定来自显卡。</div>
+  </section>
+  <details>
+    <summary>怎样确认图形加速和显卡是否选对？</summary>
+    <p>在当前浏览器地址栏输入 <code>edge://gpu</code> 或 <code>chrome://gpu</code>。</p>
+    <ul>
+      <li>查看 <strong>Graphics Feature Status</strong> 中的 WebGL／WebGL2；<code>Hardware accelerated</code> 表示该功能报告为硬件加速。</li>
+      <li>按 Ctrl + F 搜索 <code>GL_RENDERER</code>，查看浏览器报告的渲染器／显卡名称。改用独显后重新核对型号。</li>
+      <li>看到其他项目 <code>Disabled</code> 不等于图形加速整体关闭；不要求所有项目都启用。</li>
+    </ul>
+  </details>
+  <p class="extra-label">操作冲突排查 · 与帧数无关</p>
+  <section class="step" id="gestures" aria-labelledby="gestures-title">
+    <div class="step-heading"><span class="number" aria-hidden="true">＋</span><h2 id="gestures-title">右键开镜被打断？关闭鼠标手势</h2></div>
+    <p>如果按住右键移动鼠标时触发了浏览器后退、切换页面或其他手势操作，请先关闭浏览器的<strong>鼠标手势</strong>，避免与游戏右键操作冲突。</p>
+    <ol>
+      <li>在浏览器设置中搜索<strong>“鼠标手势”</strong>。</li>
+      <li>关闭<strong>“启用鼠标手势”</strong>，再回到训练场测试右键开镜。</li>
+      <li>如果浏览器没有这个设置，检查是否安装了鼠标手势扩展；可先暂停该扩展对训练场的手势处理，再测试。</li>
+    </ol>
+    <figure><img src="../download.dannnn.me/native/c3e421b66eab6728/program/assets/performance-help-mouse-gestures-da7171a950528cb33a70.png?raze-channel=public-cors-v1" width="965" height="275" loading="lazy" decoding="async" alt="浏览器设置搜索鼠标手势，启用鼠标手势的开关处于关闭状态" /><figcaption>图示：将“启用鼠标手势”保持关闭。不同浏览器、版本或扩展的入口可能不同。</figcaption></figure>
+    <div class="note">这一步用于排除右键操作冲突，<strong>不是提高帧数的设置</strong>。没有相关功能或没有冲突时，可以跳过。</div>
+  </section>
+  <footer>
+    <p>官方参考</p>
+    <a href="https://learn.microsoft.com/deployedge/microsoft-edge-browser-policies/hardwareaccelerationmodeenabled" target="_blank" rel="noopener noreferrer">Edge 图形加速说明 ↗</a>
+    <a href="https://support.microsoft.com/en-au/windows/hardware/display-graphics/optimizations-for-windowed-games-in-windows-11" target="_blank" rel="noopener noreferrer">Windows 应用显卡首选项 ↗</a>
+  </footer>
+</main>
+</body>
+
+<!-- Mirrored from https://raze.dannnn.me/performance-help-v011299.html by HTTrack Website Copier/3.x [XR&CO], Tue, 03 Nov 2026 06:34:29 GMT -->
+</html>
